@@ -38,7 +38,5 @@ def create_mucho_texto():
         np.savetxt(f'dataset/distorted_txt/{j}.txt', distor_arr, fmt='%10.20f')
 
 
-if __name__ == "__main__":
-    tmp = np.loadtxt('dataset/clean_txt/clean0.wav.txt', dtype=np.float64)
-    res = librosa.feature.inverse.mel_to_audio(tmp)
-    librosa.output.write_wav('idk.wav', res, SAMPLE_RATE)
+if __name__ == "__main__": 
+    create_mucho_texto()

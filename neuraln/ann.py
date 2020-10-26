@@ -14,12 +14,12 @@ class NeuralNetwork():
 			keras.layers.Flatten(input_shape=(128,9)),
 
 			# Hidden
-			keras.layers.Dense(524, activation='relu'),
-			keras.layers.Dense(524),
-			keras.layers.Dense(524, activation='relu'),
-			keras.layers.Dense(524),
-			keras.layers.Dense(524, activation='relu'),
-			keras.layers.Dense(524),
+			keras.layers.Dense(2048, activation='relu'),
+			keras.layers.Dense(2048, activation='relu'),
+			keras.layers.Dense(2048, activation='relu'),
+			keras.layers.Dense(2048, activation='relu'),
+			keras.layers.Dense(2048, activation='relu'),
+			keras.layers.Dense(2048, activation='relu'),
 
 			# Output
 			keras.layers.Dense(128*9)
