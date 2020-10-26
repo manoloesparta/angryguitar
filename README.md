@@ -15,9 +15,11 @@ virtualenv
 Get the clean.wav and distorted.wav files in order to create the dataset
 
 ```bash
+./setup
 virtualenv .env -p python3
 source .env/bin/activate
 pip install -r requirements.txt
+python data.py
 ```
 
 

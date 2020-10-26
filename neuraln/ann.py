@@ -22,7 +22,8 @@ class NeuralNetwork():
 			keras.layers.Dense(2048, activation='relu'),
 
 			# Output
-			keras.layers.Dense(128*9)
+			keras.layers.Dense(128*9),
+			keras.layers.Reshape((128,9))
 		])
 		self.model.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
 
@@ -31,8 +32,9 @@ class NeuralNetwork():
 
 
 	def train(self, epochs=10):
-		flat_y = np.array([i.flatten() for i in self.y_train])
-		self.model.fit(self.x_train, flat_y, epochs=epochs)
+		self.model.fit(self.x_train, self.y_train, epochs=epochs)
+		test_loss, test_acc = self.model.evaluate(self.x_test,  self.y_test, verbose=1) 
+		print('Test accuracy:', test_acc)
 
 
 	def predict(self, file_path):
