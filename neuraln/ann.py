@@ -66,13 +66,11 @@ class NeuralNetwork():
 
 		for i, val in enumerate(tqdm(res)):
 			audio = librosa.feature.inverse.mel_to_audio(val)
-			librosa.output.write_wav(f'tmp/{output}{i}.wav', audio, self.SAMPLE_RATE)
+			librosa.output.write_wav(f'tmp/{output}{i}.wav', audio, self.SAMPLE_RATE//2)
 
 		final = AudioSegment.empty()
-		count = range(len(res))
-
-		for i in count:
-			final += AudioSegment.from_file(f'tmp/audio{i}.wav')
+		for i, _ in enumerate(res):
+			final += AudioSegment.from_wav(f'tmp/{output}{i}.wav')
 
 		final.export(f'{output}.wav', format='wav')
 
