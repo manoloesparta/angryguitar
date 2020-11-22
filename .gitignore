@@ -8,3 +8,5 @@ distorted.wav
 clean.wav
 output.wav
 tmp/
+.ipynb_checkpoints
+*.ipynb

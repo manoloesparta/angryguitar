@@ -1,43 +1,34 @@
-import os
-import shutil
-import librosa
-import concurrent
 import numpy as np
 from . import load
 from tqdm import tqdm
 import librosa.display
 import tensorflow as tf
+from . import AutoEncoder
+import os, shutil, librosa
 from tensorflow import keras
 from pydub import AudioSegment
 from pydub.playback import play
 from sklearn.model_selection import train_test_split
 
 
-class NeuralNetwork():
+class DistortionANN():
 
 	SAMPLE_RATE = 44100
 
 	def __init__(self, data_path):
-
 		self.data_path = data_path
-		self.model = keras.Sequential([
-			keras.layers.Flatten(input_shape=(128,9)),
-
-			keras.layers.Dense(2048, activation='relu'),
-			keras.layers.Dense(2048, activation='relu'),
-			keras.layers.Dense(2048, activation='relu'),
-			keras.layers.Dense(2048, activation='relu'),
-			keras.layers.Dense(2048, activation='relu'),
-			keras.layers.Dense(2048, activation='relu'),
-
-			keras.layers.Dense(128*9),
-			keras.layers.Reshape((128,9))
-		])
-		self.model.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
+		self.model = AutoEncoder()
+		self.model.compile(optimizer='adam', loss=tf.keras.losses.MeanSquaredError(), metrics=['accuracy'])
 
 
 	def train(self, epochs=10):
 		x, y = load.load_dataset(self.data_path)
+		x = x[..., tf.newaxis]
+		y = y[..., tf.newaxis]
+
+		print(x.shape)
+		print(y.shape)
+
 		x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1)
 
 		self.model.fit(x_train, y_train, epochs=epochs)
@@ -76,8 +67,3 @@ class NeuralNetwork():
 
 		if remove:
 			shutil.rmtree('tmp')
-
-
-	@staticmethod
-	def from_saved():
-		pass
