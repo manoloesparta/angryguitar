@@ -1,4 +1,4 @@
-from neuraln import DistortionANN
+from angry import DistortionANN
 
 def main():
 	ann = DistortionANN(data_path='./dataset')

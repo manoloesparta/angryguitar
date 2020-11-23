@@ -11,7 +11,7 @@ def create_audio_clips():
     clean = AudioSegment.from_file('clean.wav', 'wav') 
     distor = AudioSegment.from_file('distorted.wav', 'wav')
 
-    minimum = min((clean), len(distor))
+    minimum = min(len(clean), len(distor))
     
     for i in range(0, minimum - 200, 200):
         clean_slice = clean[i:i+200]

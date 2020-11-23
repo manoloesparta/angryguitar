@@ -1,5 +1,18 @@
-# Distortion
+# Angry Guitar
 
+> Fake Distorion
+
+## About
+
+This project emulates the guitar distortion effect via neural networks. The specifcations are the following:
+
+* ESP LTD James Hetfield Guitar
+* Behringer UM2 Interface
+* Sample rate of 44100
+* Bit Depth of 32 bit float
+* Garage Band DAW
+* Cool Jazz Combo as clean
+* Classic Drive as distorted
 
 ## Prerequisites
 
@@ -8,7 +21,6 @@ python 3.7 (or newer)
 pip
 virtualenv
 ```
-
 
 ## Setup
 
@@ -22,14 +34,12 @@ pip install -r requirements.txt
 python data.py
 ```
 
-
 ## Running
 
 ```bash
 source .env/bin/activate
 python main.py
 ```
-
 
 ## License
 
