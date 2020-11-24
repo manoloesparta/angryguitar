@@ -1,30 +1,26 @@
 import numpy as np
-from . import load
 from tqdm import tqdm
-import librosa.display
-import tensorflow as tf
-from . import AutoEncoder
 import os, shutil, librosa
-from tensorflow import keras
+from angry import load
 from pydub import AudioSegment
-from pydub.playback import play
+from angry import NeuralNetwork
 from sklearn.model_selection import train_test_split
 
 
-class DistortionANN():
+class AngryNeuralNetwork():
 
 
 	def __init__(self, data_path):
 		self.data_path = data_path
-		self.model = AutoEncoder()
-		self.model.compile(optimizer='adam', loss=tf.keras.losses.MeanSquaredError(), metrics=['accuracy'])
+		self.model = NeuralNetwork()
+		self.model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 
 
 	def train(self, epochs=10):
 		x, y = load.load_dataset(self.data_path)
 		x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1)
 
-		self.model.fit(x_train, y_train, epochs=epochs)
+		self.model.fit(x_train, y_train, epochs=epochs, validation_data=(x_test, y_test))
 		_, test_acc = self.model.evaluate(x_test, y_test, verbose=1) 
 
 		print('Test accuracy:', test_acc)
