@@ -27,12 +27,14 @@ def create_mucho_texto():
 
     for i, j in zip(clean_wav, distor_wav):
         clean_y, clean_sr = librosa.load(f'dataset/clean_wav/{i}')
-        clean_arr = librosa.feature.melspectrogram(y=clean_y, sr=clean_sr)
-        np.savetxt(f'dataset/clean_txt/{i}.txt', clean_arr, fmt='%10.20f')
+        clean_arr = librosa.feature.mfcc(y=clean_y, sr=clean_sr, n_mfcc=50)
+        np.savetxt(f'dataset/clean_txt/{i}.txt', clean_arr)
 
         distor_y, distor_sr = librosa.load(f'dataset/distorted_wav/{j}')
-        distor_arr = librosa.feature.melspectrogram(y=distor_y, sr=distor_sr)
-        np.savetxt(f'dataset/distorted_txt/{j}.txt', distor_arr, fmt='%10.20f')
+        distor_arr = librosa.feature.mfcc(y=distor_y, sr=distor_sr, n_mfcc=50)
+        np.savetxt(f'dataset/distorted_txt/{j}.txt', distor_arr)
+
+        print(f'{i}, {j} created')
 
 
 if __name__ == "__main__": 
