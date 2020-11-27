@@ -21,4 +21,6 @@ def load_dataset(path):
 	clean_data = np.array(clean_data)
 	distor_data = np.array(distor_data)
 
+	print(clean_data.shape)
+
 	return clean_data, distor_data

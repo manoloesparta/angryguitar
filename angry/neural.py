@@ -10,18 +10,13 @@ class NeuralNetwork(tf.keras.Model):
             layers.Flatten(),
 
             # Hidden
-            layers.Dense(1200, activation='relu'),
-            layers.Dense(1200, activation='relu'),
-            layers.Dense(1200, activation='relu'),
-            layers.Dense(1200, activation='relu'),
-            layers.Dense(1200, activation='relu'),
-            layers.Dense(1200, activation='relu'),
-            layers.Dense(1200, activation='relu'),
-            layers.Dense(1200, activation='relu'),
+            layers.Dense(3000, activation='relu'),
+            layers.Dense(3000, activation='relu'),
+            layers.Dense(3000, activation='relu'),
 
             # Output
-            layers.Dense(50*9, activation='relu'),
-            layers.Reshape((50,9))
+            layers.Dense(128*22, activation='relu'),
+            layers.Reshape((128,22))
         ])
 
 
