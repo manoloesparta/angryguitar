@@ -28,18 +28,6 @@ class AngryNeuralNetwork():
 		print(f'Test accuracy: {test_acc}, Test loss: {test_loss}')
 
 
-	# TODO: Predict sample, predict clip, checkpoints
-
-	
-	def predict_sample(self, file_path):
-		y, sr = librosa.load(file_path)
-		before = librosa.feature.melspectrogram(y=y, sr=sr)
-		after = self.model.predict(np.array([before]))[0]
-		audio = librosa.feature.inverse.mel_to_audio(after)
-		# change this
-		librosa.output.write_wav(f'trying.wav', y=y, sr=sr)
-
-
 	def predict_clip(self, file_path, output='output', remove=False):
 		if os.path.exists('tmp'):
 			shutil.rmtree('tmp')
